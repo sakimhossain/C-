@@ -1,0 +1,9 @@
+#include<stdio.h>
+main()
+{
+    int m[2];
+    int *p=m;
+    m[0]=100;
+    m[1]=200;
+    printf("%d %d",++*p,*p);
+}
