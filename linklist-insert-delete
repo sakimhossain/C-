@@ -1,0 +1,63 @@
+include<iostream>
+#include<stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+using namespace std;
+
+    struct link
+    {
+        int data;
+        link *next;
+    };
+
+    link *head = NULL;
+    link *present = NULL;
+
+    void create (int data){
+        link *lnk = (struct link*)malloc(sizeof(struct link));
+        lnk->data = data;
+        lnk->next = head;
+        head = lnk;
+    }
+
+    void deleted (int data){
+        struct link *crnt = new link;
+        struct link *prv = new link;
+            crnt =head;
+            for(int i=1;i<data;i++){
+                prv = crnt;
+                crnt = prv->next;
+            }
+            prv->next = crnt->next;
+
+    }
+
+    void printList() {
+        struct link *ptr = head;
+        cout<<"\n[head] =>";
+        while(ptr != NULL) {
+            cout<<"=>"<<ptr->data;
+            ptr = ptr->next;
+        }
+        cout<<"[null]\n";
+    }
+
+    int main(){
+
+    int n, i,value,d;
+    cout<<"Create Size" <<'\n';
+    cin>>n;
+    cout<<"Create Value" <<'\n';
+    for(i=0;i<n; i++){
+        cin>>value;
+        create(value);
+
+    }
+    printList();
+    cout<<'\n'<<"Delete Position Number"<<'\n';
+    cin>>d;
+    deleted(d);
+    printList();
+
+    return 0;
+    }
