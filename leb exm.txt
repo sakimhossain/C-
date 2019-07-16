@@ -1,0 +1,256 @@
+stack Arithmatic Expression cheching
+#include <stdio.h>
+#define max 100
+
+char data[max];
+int top = -1;
+
+void pop()
+{
+    if(top == -1 )
+        printf("The stack is empty\n");
+    else
+        data[top--];
+}
+
+void push(char item)
+{
+    if(top == max - 1 )
+        printf("The stack is full\n");
+    else
+        data[++top] = item;
+}
+
+void main()
+{
+    int i;
+    char exp[100] = "[(a+b)-{c+d}]-[f+g]";
+
+    for(i=0; i<strlen(exp); i++)
+        if(exp[i] == '(' || exp[i] == '{' || exp[i] == '[')
+            push(exp[i]);
+        else if(exp[i] == ')' || exp[i] == '}' || exp[i] == ']')
+        {
+            if(data[top] == '(' && exp[i] == ')')
+                pop();
+            else if(data[top] == '{' && exp[i] == '}')
+                pop();
+            else if(data[top] == '[' && exp[i] == ']')
+                pop();
+        }
+
+    if(top < 0)
+        printf("The Expression is right\n");
+    else
+        printf("The Expression is wrong\n");
+}
+
+
+stack using array
+#include <stdio.h>
+#define max 5
+
+int data[max], top = -1;
+
+void pop()
+{
+    if(top == -1 )
+        printf("The stack is empty\n");
+    else
+        printf("%d ",data[top--]);
+}
+
+void push()
+{
+    int item;
+    scanf("%d",&item);
+
+    if(top == max - 1 )
+        printf("The stack is full\n");
+    else
+        data[++top] = item;
+}
+
+void main()
+{
+    int i,n,item;
+
+    printf("Enter the number of item: ");
+    scanf("%d",&n);
+
+    printf("\nThe push items are:\n");
+    for(i=0; i<n; i++)
+        push();
+
+    printf("\nThe pop items are:\n\n");
+    printf("Top = %d\n\n",top);
+
+    for(i=0; i<n; i++)
+        pop();
+
+    printf("\n\nTop = %d\n\n",top);
+}
+
+stack linkedlist
+
+#include <stdio.h>
+
+struct Node
+{
+    int data;
+    struct Node *next;
+
+}*top = NULL, *newNode;
+
+void pop()
+{
+    printf("\nTop = %p\n\n",top);
+
+    while (top != NULL)
+    {
+        printf("%d ",top->data);
+        top = top->next;
+    }
+
+    printf("\n\nTop = %p\n\n",top);
+}
+
+void push()
+{
+    newNode = (struct Node*)malloc(sizeof(struct Node));
+
+    scanf("%d",&newNode->data);
+    newNode->next = NULL;
+
+    if(top == NULL)
+        top = newNode;
+    else{
+       newNode->next = top;
+       top = newNode;
+    }
+}
+
+void main ()
+{
+    int i, n;
+
+    printf("Enter the number of item: ");
+    scanf("%d",&n);
+
+    printf("\nThe push items are:\n");
+    for(i=0; i<n; i++)
+        push();
+
+    printf("\nThe pop items are:\n");
+    pop();
+
+}
+
+queue using array
+
+#include <stdio.h>
+#define max 10
+
+int data[max], front = -1, rear = -1;
+
+void pop()
+{
+    if(rear < front )
+        printf("\nThe queue is empty\n");
+    else
+        printf("%d ",data[front++]);
+}
+
+void push()
+{
+    int item;
+    scanf("%d",&item);
+
+    if(rear == max - 1 )
+        printf("The queue is full\n");
+    else
+    {
+        if(front == -1 && rear == -1)
+        {
+            front = 0;
+            rear = 0;
+        }
+        else
+            ++rear;
+
+        data[rear] = item;
+    }
+}
+
+void main()
+{
+    int i,n;
+
+    printf("Enter the number of item: ");
+    scanf("%d",&n);
+
+    printf("\nThe push items are:\n");
+    for(i=0; i<n; i++)
+        push();
+
+    printf("\nThe pop items are:\n");
+
+    for(i=0; i<n; i++)
+        pop();
+
+}
+
+queue linked list
+
+#include <stdio.h>
+
+struct Node
+{
+    int data;
+    struct Node *next;
+
+}*front = NULL, *rear = NULL, *newNode;
+
+void pop()
+{
+    while (front != NULL)
+    {
+        printf("%d ",front->data);
+        front = front->next;
+    }
+}
+
+void push()
+{
+    newNode = (struct Node*)malloc(sizeof(struct Node));
+
+    scanf("%d",&newNode->data);
+    newNode->next = NULL;
+
+    if(front == NULL && rear == NULL)
+    {
+        front = newNode;
+        rear = newNode;
+    }
+    else
+    {
+       rear->next = newNode;
+       rear = newNode;
+    }
+}
+
+void main ()
+{
+    int i, n;
+
+    printf("Enter the number of item: ");
+    scanf("%d",&n);
+
+    printf("\nThe push items are:\n");
+    for(i=0; i<n; i++)
+        push();
+
+    printf("\nThe pop items are:\n");
+    pop();
+
+}
